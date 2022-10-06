@@ -6,7 +6,7 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 
-const taskArray = [
+const tasksArray = [
   {
     id: 1,
     name: 'work out',
@@ -25,8 +25,6 @@ const oneTask = {
   isCompleted: false,
 };
 
-const deleteResult = { raw: [], affected: 1 };
-
 const createTaskDto: CreateTaskDto = {
   name: 'work out',
 };
@@ -42,6 +40,8 @@ const updatedTask = {
   isCompleted: true,
 };
 
+const deleteResult = { raw: [], affected: 1 };
+
 describe('TasksService', () => {
   let service: TasksService;
   let repository: Repository<Task>;
@@ -54,7 +54,7 @@ describe('TasksService', () => {
           provide: getRepositoryToken(Task),
           useValue: {
             save: jest.fn().mockResolvedValue(oneTask),
-            find: jest.fn().mockResolvedValue(taskArray),
+            find: jest.fn().mockResolvedValue(tasksArray),
             findOne: jest.fn().mockResolvedValue(oneTask),
             delete: jest.fn().mockResolvedValue(deleteResult),
           },
@@ -84,7 +84,7 @@ describe('TasksService', () => {
   describe('findAll()', () => {
     it('should get an array of tasks', async () => {
       const repoSpy = jest.spyOn(repository, 'find');
-      expect(service.findAll()).resolves.toEqual(taskArray);
+      expect(service.findAll()).resolves.toEqual(tasksArray);
       expect(repoSpy).toBeCalled();
     });
   });
