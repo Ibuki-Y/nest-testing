@@ -54,7 +54,7 @@ $ npm run test
 # e2e tests
 $ npm run test:e2e
 
-# test coverage
+# test coverage(テスト対象のソースコードのうち、どの程度の割合のコードがテストされたか)
 $ npm run test:cov
 ```
 
